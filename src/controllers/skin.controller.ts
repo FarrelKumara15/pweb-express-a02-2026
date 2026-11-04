@@ -5,6 +5,7 @@ import { HttpError } from "../utils/httpError";
 import { successBody } from "../utils/response";
 import {
   buildMetadata,
+  INT_MAX,
   parseIdParam,
   parsePagination,
   queryString,
@@ -24,7 +25,9 @@ export const getAllSkins: RequestHandler = async (req, res) => {
 
   if (heroIdQuery) {
     const heroId = toInt(heroIdQuery);
-    if (heroId === null) throw new HttpError(400, "heroId harus bilangan bulat");
+    if (heroId === null || heroId < 1 || heroId > INT_MAX) {
+      throw new HttpError(400, "heroId harus bilangan bulat positif dalam rentang Int32");
+    }
     where.heroId = heroId;
   }
 

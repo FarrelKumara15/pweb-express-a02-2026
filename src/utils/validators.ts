@@ -59,7 +59,9 @@ export function parsePagination(query: Record<string, unknown>) {
   const rawLimit = toInt(queryString(query.limit));
   const page = rawPage && rawPage > 0 ? rawPage : 1;
   const limit = rawLimit && rawLimit > 0 ? Math.min(rawLimit, 1000) : 10;
-  return { page, limit, skip: (page - 1) * limit };
+  const skip = (page - 1) * limit;
+  if (!Number.isSafeInteger(skip)) throw new HttpError(400, "page terlalu besar");
+  return { page, limit, skip };
 }
 
 export function buildMetadata(

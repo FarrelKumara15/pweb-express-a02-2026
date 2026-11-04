@@ -14,6 +14,10 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
     res.status(400).json(failBody("Body request bukan JSON yang valid"));
     return;
   }
+  if (err?.type === "entity.too.large") {
+    res.status(413).json(failBody("Body request terlalu besar"));
+    return;
+  }
 
   // Error Prisma sebagai jaring pengaman (mis. race condition)
   if (err?.code === "P2002") {

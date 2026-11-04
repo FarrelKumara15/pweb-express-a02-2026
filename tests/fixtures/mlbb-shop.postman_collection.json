@@ -1,0 +1,830 @@
+{
+  "info": {
+    "name": "MLBB Shop - Urutan Testcase",
+    "description": "28 testcase sesuai tabel Urutan Testcase. Jalankan `npx tsx prisma/seed.ts` dulu, lalu kirim request berurutan dari 01 sampai 28.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01. Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "health"
+          ]
+        },
+        "description": "GET /health\nHasil yang benar: 200"
+      }
+    },
+    {
+      "name": "02. Daftar Hero Role Marksman",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/heroes?role=MARKSMAN&limit=5",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "heroes"
+          ],
+          "query": [
+            {
+              "key": "role",
+              "value": "MARKSMAN"
+            },
+            {
+              "key": "limit",
+              "value": "5"
+            }
+          ]
+        },
+        "description": "GET /api/heroes?role=MARKSMAN&limit=5\nHasil yang benar: 200, totalItems 20"
+      }
+    },
+    {
+      "name": "03. Cari Hero 'la'",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/heroes?search=la",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "heroes"
+          ],
+          "query": [
+            {
+              "key": "search",
+              "value": "la"
+            }
+          ]
+        },
+        "description": "GET /api/heroes?search=la\nHasil yang benar: 200, totalItems 10"
+      }
+    },
+    {
+      "name": "04. Detail Hero Layla",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/heroes/18",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "heroes",
+            "18"
+          ]
+        },
+        "description": "GET /api/heroes/18\nHasil yang benar: 200, Layla dengan 11 skin"
+      }
+    },
+    {
+      "name": "05. Detail Hero Tidak Ada",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/heroes/999",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "heroes",
+            "999"
+          ]
+        },
+        "description": "GET /api/heroes/999\nHasil yang benar: 404"
+      }
+    },
+    {
+      "name": "06. Tambah Hero Collie",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/heroes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "heroes"
+          ]
+        },
+        "description": "POST /api/heroes\nHasil yang benar: 201, id 134",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Collie\",\n  \"role\": \"MAGE\",\n  \"lane\": \"MID\",\n  \"releaseYear\": 2026,\n  \"priceBP\": 32000,\n  \"priceDiamond\": 599\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "07. Tambah Hero Nama Sudah Ada",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/heroes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "heroes"
+          ]
+        },
+        "description": "POST /api/heroes\nHasil yang benar: 409",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Collie\",\n  \"role\": \"MAGE\",\n  \"lane\": \"MID\",\n  \"releaseYear\": 2026,\n  \"priceBP\": 32000,\n  \"priceDiamond\": 599\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "08. Tambah Hero Data Kurang",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/heroes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "heroes"
+          ]
+        },
+        "description": "POST /api/heroes\nHasil yang benar: 400",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Kaiden\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "09. Daftar Skin Layla",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/skins?heroId=18",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "skins"
+          ],
+          "query": [
+            {
+              "key": "heroId",
+              "value": "18"
+            }
+          ]
+        },
+        "description": "GET /api/skins?heroId=18\nHasil yang benar: 200, totalItems 11"
+      }
+    },
+    {
+      "name": "10. Daftar Skin Rarity GRAND",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/skins?rarity=GRAND",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "skins"
+          ],
+          "query": [
+            {
+              "key": "rarity",
+              "value": "GRAND"
+            }
+          ]
+        },
+        "description": "GET /api/skins?rarity=GRAND\nHasil yang benar: 200, totalItems 98"
+      }
+    },
+    {
+      "name": "11. Detail Skin Silverbolt Raiko",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/skins/891",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "skins",
+            "891"
+          ]
+        },
+        "description": "GET /api/skins/891\nHasil yang benar: 200, Silverbolt Raiko (Selena)"
+      }
+    },
+    {
+      "name": "12. Buat Player JunglerMalam",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/players",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players"
+          ]
+        },
+        "description": "POST /api/players\nHasil yang benar: 201, id 4",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nickname\": \"JunglerMalam\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "13. Buat Player Nickname Dipakai",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/players",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players"
+          ]
+        },
+        "description": "POST /api/players\nHasil yang benar: 409",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nickname\": \"ArekITS\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "14. Top Up 706 Diamond",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/players/3/topup",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "3",
+            "topup"
+          ]
+        },
+        "description": "POST /api/players/3/topup\nHasil yang benar: 200, diamond 706",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 706\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "15. Top Up Amount Negatif",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/players/3/topup",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "3",
+            "topup"
+          ]
+        },
+        "description": "POST /api/players/3/topup\nHasil yang benar: 400",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": -10\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "16. Match Menang (WIN)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/players/3/matches",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "3",
+            "matches"
+          ]
+        },
+        "description": "POST /api/players/3/matches\nHasil yang benar: 200, bp 10300",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"result\": \"WIN\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "17. Beli Freya Pakai BP (Gagal)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/players/3/heroes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "3",
+            "heroes"
+          ]
+        },
+        "description": "POST /api/players/3/heroes\nHasil yang benar: 400 (Freya tanpa harga BP)",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"heroId\": 22,\n  \"currency\": \"BP\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "18. Beli Freya Pakai Diamond",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/players/3/heroes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "3",
+            "heroes"
+          ]
+        },
+        "description": "POST /api/players/3/heroes\nHasil yang benar: 201, diamond 107",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"heroId\": 22,\n  \"currency\": \"DIAMOND\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "19. Beli Layla Pakai BP",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/players/3/heroes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "3",
+            "heroes"
+          ]
+        },
+        "description": "POST /api/players/3/heroes\nHasil yang benar: 201, bp 8300",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"heroId\": 18,\n  \"currency\": \"BP\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "20. Beli Layla Lagi (Sudah Punya)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/players/3/heroes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "3",
+            "heroes"
+          ]
+        },
+        "description": "POST /api/players/3/heroes\nHasil yang benar: 409 (sudah punya Layla)",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"heroId\": 18,\n  \"currency\": \"DIAMOND\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "21. Beli Hirara BP Kurang",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/players/1/heroes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "1",
+            "heroes"
+          ]
+        },
+        "description": "POST /api/players/1/heroes\nHasil yang benar: 400 (BP kurang)",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"heroId\": 133,\n  \"currency\": \"BP\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "22. Detail Player MageSurabaya",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/players/3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "3"
+          ]
+        },
+        "description": "GET /api/players/3\nHasil yang benar: 200, punya Freya dan Layla"
+      }
+    },
+    {
+      "name": "23. Ganti Nickname Jadi MageITS",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/players/3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "3"
+          ]
+        },
+        "description": "PATCH /api/players/3\nHasil yang benar: 200",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nickname\": \"MageITS\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "24. Ganti Nickname Dipakai",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/players/3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "3"
+          ]
+        },
+        "description": "PATCH /api/players/3\nHasil yang benar: 409",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nickname\": \"ArekITS\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "25. Statistik Toko",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/statistics",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "statistics"
+          ]
+        },
+        "description": "GET /api/statistics\nHasil yang benar: 200, sesuai gambar Fitur 7"
+      }
+    },
+    {
+      "name": "26. Hapus Player JunglerMalam",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/players/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "4"
+          ]
+        },
+        "description": "DELETE /api/players/4\nHasil yang benar: 200"
+      }
+    },
+    {
+      "name": "27. Detail Player Terhapus",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/players/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "players",
+            "4"
+          ]
+        },
+        "description": "GET /api/players/4\nHasil yang benar: 404"
+      }
+    },
+    {
+      "name": "28. Endpoint Tidak Ada",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/ngawur",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "ngawur"
+          ]
+        },
+        "description": "GET /api/ngawur\nHasil yang benar: 404"
+      }
+    }
+  ]
+}

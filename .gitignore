@@ -5,3 +5,9 @@ dist
 !.env.example
 src/generated
 .neon
+.agents/
+AGENTS.md
+Modul4_MLBB_Shop.md
+skills-lock.json
+neon.ts
+hello.ts
